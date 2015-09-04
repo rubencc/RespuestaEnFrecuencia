@@ -9,7 +9,6 @@ namespace RespuestaEnFrecuencia.ViewModels
 {
     public class FrecuencyResponseChartViewModel : ViewModelBase
     {
-
         public FrecuencyResponseChartViewModel()
         {
             this.CalculateCommand = new CommandBase(CalculateFrecuencyResponse());
