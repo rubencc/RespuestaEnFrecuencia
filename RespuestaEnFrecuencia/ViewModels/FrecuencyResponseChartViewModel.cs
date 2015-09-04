@@ -13,7 +13,9 @@ namespace RespuestaEnFrecuencia.ViewModels
         public FrecuencyResponseChartViewModel()
         {
             this.CalculateCommand = new CommandBase(CalculateFrecuencyResponse());
-
+            this.range = 1;
+            this.minValue = -10.0;
+            this.maxValue = 10.0;
         }
 
         private EnumerableDataSource<ChartValuesResult> data;
@@ -27,6 +29,39 @@ namespace RespuestaEnFrecuencia.ViewModels
             }
         }
 
+        private double range;
+        public double Range
+        {
+            get { return range; }
+            set
+            {
+                range = value;
+                NotifyPropertyChanged("Range");
+            }
+        }
+
+        private double minValue;
+        public double MinValue
+        {
+            get { return minValue; }
+            set
+            {
+                minValue = value;
+                NotifyPropertyChanged("MinValue");
+            }
+        }
+
+        private double maxValue;
+        public double MaxValue
+        {
+            get { return maxValue; }
+            set
+            {
+                maxValue = value;
+                NotifyPropertyChanged("MaxValue");
+            }
+        }
+
         public CommandBase CalculateCommand { get; private set; }
 
         private Action CalculateFrecuencyResponse()
@@ -36,7 +71,7 @@ namespace RespuestaEnFrecuencia.ViewModels
 
         private void RequestCalculate()
         {
-            double[] input = this.InitialiceInput();
+            double[] input = this.InitialiceInput(this.range, this.minValue, this.maxValue);
           
             FrecuencyResponse calc = new FrecuencyResponse();
             double[] output = calc.Calculate(input);
@@ -69,14 +104,14 @@ namespace RespuestaEnFrecuencia.ViewModels
             return results;
         }
 
-        private double[] InitialiceInput()
+        private double[] InitialiceInput(double rgn, double min, double max)
         {
             List<double> list = new List<double>();
-            double value = -10.0;
+            double value = min;
 
-            for (int i = -40; i < 40; i++)
+            for (int i = 0; i < max - min; i++)
             {
-                value += 0.25;
+                value += rgn;
                 list.Add(value);
             }
 

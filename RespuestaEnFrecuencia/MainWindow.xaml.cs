@@ -31,7 +31,6 @@ namespace RespuestaEnFrecuencia
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.DataContext = new FrecuencyResponseChartViewModel();
-            this.LineGraph = new LineGraph();
         }
     }
 }
