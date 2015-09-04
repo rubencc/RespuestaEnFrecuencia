@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Research.DynamicDataDisplay;
+using RespuestaEnFrecuencia.ViewModels;
 
 namespace RespuestaEnFrecuencia
 {
@@ -23,6 +25,13 @@ namespace RespuestaEnFrecuencia
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new FrecuencyResponseChartViewModel();
+            this.LineGraph = new LineGraph();
         }
     }
 }
